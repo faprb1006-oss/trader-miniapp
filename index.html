@@ -1,56 +1,69 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>معامله‌گر</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0f1115;color:#f4f6f8;font-family:Tahoma,Arial,sans-serif}
-.app{max-width:520px;margin:auto;padding:18px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-h1{margin:0;font-size:26px}p{color:#9da5b1}
-.balance{text-align:left}.balance small{display:block;color:#8d96a3;font-size:11px}.balance strong{font-size:14px}
-.card{background:#181b21;border:1px solid #272c35;border-radius:18px;padding:16px;margin-bottom:14px}
-.row{display:flex;justify-content:space-between;align-items:center}.row div span{display:block;color:#aeb5bf;font-size:13px}
-.row b{display:block;font-size:25px;margin-top:6px}.up{color:#40d28a;font-weight:bold}
-.chart{height:150px;margin-top:16px;position:relative;overflow:hidden;background:linear-gradient(transparent 49%,#252a33 50%,transparent 51%)}
-.line{position:absolute;inset:25px 0;clip-path:polygon(0 75%,8% 68%,16% 72%,25% 45%,34% 58%,43% 35%,52% 49%,61% 28%,70% 39%,79% 22%,88% 31%,100% 8%,100% 14%,89% 37%,80% 28%,71% 45%,62% 34%,53% 55%,44% 41%,35% 64%,26% 51%,17% 78%,8% 74%,0 82%);background:#40d28a}
-.tabs{display:flex;gap:8px;margin-bottom:16px}.tab{flex:1;padding:12px;border:0;border-radius:12px;background:#242932;color:#cdd3dc;font-weight:bold}
-.tab.active.buy{background:#1d6f4b;color:#fff}.tab.active.sell{background:#7d3038;color:#fff}
-label{display:block;color:#aeb5bf;font-size:13px;margin-bottom:7px}
-input{width:100%;padding:14px;border-radius:12px;border:1px solid #303640;background:#101217;color:#fff;font-size:16px;margin-bottom:12px}
-.primary{width:100%;padding:14px;border:0;border-radius:12px;background:#2a7fff;color:white;font-size:16px;font-weight:bold}
-.message{min-height:18px;text-align:center;font-size:13px;margin-bottom:0}
-h2{font-size:17px;margin:0 0 12px}.empty{text-align:center;color:#818a97;padding:15px}
-.trade{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #292e37}.trade:last-child{border:0}
-.trade.buy b{color:#40d28a}.trade.sell b{color:#ff6f78}.trade small{color:#8f98a5}
+*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#fff;font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:520px;margin:auto;padding:18px}.header{display:flex;justify-content:space-between;margin-bottom:18px}
+.title{font-size:25px;font-weight:700}.sub,.muted{font-size:12px;color:#9aa4b2}.card{background:#141b2d;border:1px solid #26304a;border-radius:18px;padding:16px;margin-bottom:14px}
+.balance{font-size:28px;font-weight:700;margin-top:7px}.pair{display:flex;justify-content:space-between;align-items:center}.pair-name{font-size:18px;font-weight:700}
+.price{font-size:27px;font-weight:700;margin-top:14px}.change{margin-top:6px;font-size:14px}.positive{color:#35d07f}.negative{color:#ff647c}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tab{flex:1;padding:12px;border:0;border-radius:12px;background:#202a40;color:#cbd3df;font-size:15px}
+.tab.active{background:#35d07f;color:#07120c;font-weight:700}.input{width:100%;padding:14px;border-radius:12px;border:1px solid #34405d;background:#0f1627;color:#fff;font-size:18px}
+.btn{width:100%;margin-top:12px;padding:14px;border:0;border-radius:12px;background:#35d07f;color:#07120c;font-size:16px;font-weight:700}
+.btn.sell{background:#ff647c;color:#21050b}.status{text-align:center;font-size:12px;color:#9aa4b2;margin-top:10px}.trade{padding:11px 0;border-bottom:1px solid #273149;font-size:13px}.trade:last-child{border:0}
+.row{display:flex;justify-content:space-between}
 </style>
 </head>
 <body>
-<main class="app">
-<header>
-<div><h1>معامله‌گر</h1><p id="welcome">مینی‌اپ معاملاتی</p></div>
-<div class="balance"><small>موجودی</small><strong id="balance">10,000 USDT</strong></div>
-</header>
-<section class="card market">
-<div class="row"><div><span>BTC/USDT</span><b>$65,000</b></div><span class="up">+1.24%</span></div>
-<div class="chart"><div class="line"></div></div>
-</section>
-<section class="card order">
-<div class="tabs"><button class="tab active buy" data-side="buy">خرید</button><button class="tab sell" data-side="sell">فروش</button></div>
-<label>مقدار (USDT)</label><input id="amount" type="number" min="1" value="100" inputmode="decimal">
-<button id="submit" class="primary">ثبت سفارش خرید</button><p id="message" class="message"></p>
-</section>
-<section class="card"><h2>تاریخچه معاملات</h2><div id="history" class="empty">هنوز معامله‌ای ثبت نشده است.</div></section>
-</main>
+<div class="wrap">
+<div class="header"><div><div class="title">معامله‌گر</div><div class="sub">مینی اپ معاملاتی</div></div><div class="sub" id="userName">مهمان</div></div>
+
+<div class="card"><div class="sub">موجودی آزمایشی</div><div class="balance" id="balance">$10,000.00</div></div>
+
+<div class="card">
+<div class="pair"><div><div class="pair-name">BTC / USDT</div><div class="sub">قیمت لحظه‌ای</div></div><div class="sub" id="updated">در حال دریافت...</div></div>
+<div class="price" id="btcPrice">در حال دریافت...</div><div class="change" id="btcChange">—</div>
+</div>
+
+<div class="card">
+<div class="tabs"><button class="tab active" id="buyTab" onclick="setSide('buy')">خرید</button><button class="tab" id="sellTab" onclick="setSide('sell')">فروش</button></div>
+<input id="amount" class="input" type="number" min="1" step=".01" value="100" placeholder="مبلغ USDT">
+<button id="orderBtn" class="btn" onclick="placeOrder()">ثبت سفارش خرید</button>
+<div class="status" id="status">سفارش‌ها فقط آزمایشی هستند.</div>
+</div>
+
+<div class="card"><div class="pair"><div class="pair-name">تاریخچه معاملات</div><div class="sub">آزمایشی</div></div>
+<div id="history" style="margin-top:10px"><div class="muted">هنوز معامله‌ای ثبت نشده است.</div></div></div>
+</div>
+
 <script>
-const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand();}
-const b=document.getElementById('balance'),a=document.getElementById('amount'),s=document.getElementById('submit'),m=document.getElementById('message'),h=document.getElementById('history');
-let side='buy',balance=10000,trades=[];
-if(tg?.initDataUnsafe?.user){const u=tg.initDataUnsafe.user;document.getElementById('welcome').textContent=`سلام ${u.first_name||''} 👋`;}
-document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>{side=x.dataset.side;document.querySelectorAll('.tab').forEach(y=>y.classList.remove('active'));x.classList.add('active');s.textContent=`ثبت سفارش ${side==='buy'?'خرید':'فروش'}`;m.textContent='';});
-s.onclick=()=>{const v=Number(a.value);if(!v||v<=0){m.textContent='مبلغ معتبر وارد کنید.';return;}if(side==='buy'&&v>balance){m.textContent='موجودی کافی نیست.';return;}balance+=side==='buy'?-v:v;trades.unshift({side,amount:v,time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})});b.textContent=balance.toLocaleString('en-US',{maximumFractionDigits:2})+' USDT';m.textContent='سفارش آزمایشی با موفقیت ثبت شد.';render();};
-function render(){h.innerHTML=trades.length?trades.map(t=>`<div class="trade ${t.side}"><div><b>${t.side==='buy'?'خرید':'فروش'}</b><small> · ${t.time}</small></div><strong>${t.amount.toLocaleString('en-US')} USDT</strong></div>`).join(''):'<div class="empty">هنوز معامله‌ای ثبت نشده است.</div>';}
+let side='buy',balance=10000,currentPrice=0;
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();const u=tg.initDataUnsafe?.user;if(u)document.getElementById('userName').textContent=u.first_name||u.username||'کاربر';}
+function money(n){return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function setSide(s){side=s;document.getElementById('buyTab').classList.toggle('active',s==='buy');document.getElementById('sellTab').classList.toggle('active',s==='sell');const b=document.getElementById('orderBtn');b.textContent=s==='buy'?'ثبت سفارش خرید':'ثبت سفارش فروش';b.className=s==='buy'?'btn':'btn sell';}
+async function loadPrice(){
+ try{
+  const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true',{cache:'no-store'});
+  if(!r.ok)throw Error();
+  const d=await r.json();currentPrice=d.bitcoin.usd;const c=d.bitcoin.usd_24h_change;
+  document.getElementById('btcPrice').textContent='$'+money(currentPrice);
+  const ce=document.getElementById('btcChange');ce.textContent=(c>=0?'+':'')+c.toFixed(2)+'% در ۲۴ ساعت';ce.className='change '+(c>=0?'positive':'negative');
+  document.getElementById('updated').textContent='بروزرسانی: '+new Date().toLocaleTimeString('fa-IR');
+ }catch(e){document.getElementById('btcPrice').textContent='خطا در دریافت قیمت';document.getElementById('btcChange').textContent='دوباره تلاش می‌شود';document.getElementById('btcChange').className='change negative';}
+}
+function placeOrder(){
+ const amount=Number(document.getElementById('amount').value);if(!amount||amount<=0){document.getElementById('status').textContent='مبلغ را وارد کن.';return;}
+ if(side==='buy'&&amount>balance){document.getElementById('status').textContent='موجودی آزمایشی کافی نیست.';return;}
+ balance+=side==='buy'?-amount:amount;document.getElementById('balance').textContent='$'+money(balance);
+ const h=document.getElementById('history');if(h.querySelector('.muted'))h.innerHTML='';
+ const x=document.createElement('div');x.className='trade';x.innerHTML='<div class="row"><strong>'+(side==='buy'?'خرید BTC':'فروش BTC')+'</strong><span>'+(side==='buy'?'-':'+')+'$'+money(amount)+'</span></div><div class="sub">قیمت: '+(currentPrice?'$'+money(currentPrice):'نامشخص')+' · '+new Date().toLocaleTimeString('fa-IR')+'</div>';h.prepend(x);
+ document.getElementById('status').textContent='سفارش آزمایشی با موفقیت ثبت شد.';
+}
+loadPrice();setInterval(loadPrice,60000);
 </script>
 </body>
 </html>
